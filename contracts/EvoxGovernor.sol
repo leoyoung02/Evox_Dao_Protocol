@@ -20,17 +20,17 @@ import "hardhat/console.sol";
  */
 contract EvoxGovernor is Governor, GovernorSettings, GovernorStorage, GovernorVotes, GovernorTimelockControl {
 
-    IEvoxSablier sablier;
+    IEvoxSablier public sablier;
     /**
      * @dev Initializes the OZGovernor contract.
-     * @param _name The name of the governor.
+     * @param _name2 The name of the governor.
      * @param _timelock The timelock controller.
      * @param _initialVotingDelay, 7200, 1 day
      * @param _initialVotingPeriod, 50400, 1 week 
      * @param _initialProposalThreshold, 0, proposal threshold
      */
     constructor(
-        string memory _name, 
+        string memory _name2, 
         TimelockController _timelock,
         IEvoxSablier _sablier,
         IVotes _token,
@@ -38,7 +38,7 @@ contract EvoxGovernor is Governor, GovernorSettings, GovernorStorage, GovernorVo
         uint32 _initialVotingPeriod, 
         uint256 _initialProposalThreshold
     )
-        Governor(_name)
+        Governor(_name2)
         GovernorSettings(_initialVotingDelay, _initialVotingPeriod, _initialProposalThreshold)
         GovernorVotes(_token)
         GovernorTimelockControl(_timelock)

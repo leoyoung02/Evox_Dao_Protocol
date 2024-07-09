@@ -2,8 +2,8 @@ export const config:any = {
   // Configuration for the deployment
   // Change the values for a more personalized deployment
   token: {
-    name: "EVOX Token",
-    symbol: "EVOX",
+    name: "sweet dream2 evox Token",
+    symbol: "sweet dream2 evox Token",
     admin: "0x33D33E756cB06b81fF0E861C0f071D3ae7E75021",
     pauser: "0x33D33E756cB06b81fF0E861C0f071D3ae7E75021",
     minter: "0x33D33E756cB06b81fF0E861C0f071D3ae7E75021"
@@ -19,17 +19,17 @@ export const config:any = {
   clockMode: false,
   // Governor
   governor: {
-    name: "EVOX DAO",
+    name: "sweet dream2 evox Dao",
     // 7200 is 24 hours (assuming 12 seconds per block)
-    votingDelay: 0,
+    votingDelay: 600,
     // 50400 is 7 days (assuming 12 seconds per block)
-    votingPeriod: 30,
+    votingPeriod: 600,
     // Threshold to be able to propose
     proposalThreshold: 0, // Set a non-zero value to prevent proposal spam.
 
-    timelock: "0x3d7899242AcDaB1dd9b612648Af39e17342647e7",
-    sablier: "0x2B700747B7417f64E563453f553222ab35B65748",
-    token: "0x058b1c749226B562Fa2Af4ddDec882b9F151946A",
+    timelock: "0x6398b6Cb974A3aF13f6259157D48cA65fb6A05DB",
+    sablier: "0xf600Aad4228AC03d5c46b3e78cC87840790E1783",
+    token: "0x6f6E03DB649186CaBC02Ae13245d4BA892D64183",
   },
   // First Mint is used to mint the initial tokens for this governance
   // It must be higher than the proposalThreshold
@@ -41,10 +41,10 @@ export const config:any = {
   // 
   // After the first mint, the deployer will lose the minter and admin role and give it to the timelock, which is the executor.
   init: {
-    token: "0x058b1c749226B562Fa2Af4ddDec882b9F151946A", 
-    governor: "0x1c14246cf9b2FFfD4A6396493F085BF73C85218E",
-    timelock: "0x3d7899242AcDaB1dd9b612648Af39e17342647e7",
-    sablier: "0x2B700747B7417f64E563453f553222ab35B65748",
+    token: "0x6f6E03DB649186CaBC02Ae13245d4BA892D64183", 
+    governor: "0xEc1c43eEC594f98946FdcE679c249605cb845838",
+    timelock: "0x6398b6Cb974A3aF13f6259157D48cA65fb6A05DB",
+    sablier: "0xf600Aad4228AC03d5c46b3e78cC87840790E1783",
     user1: "0xFcFB312FD2f225798e01f23c11a5861f4A732216",
     user2: "0x33D33E756cB06b81fF0E861C0f071D3ae7E75021",
     amount1: 10000_000000000000000000n,
@@ -52,11 +52,11 @@ export const config:any = {
   },
 
   Sablier: {
-    name : "sablier",
+    name : "sweet dream2 evox Sablier",
     sablier_contract_sepolia : "0x7a43F8a888fa15e68C103E18b0439Eb1e98E4301",
     quorum : 1000_000000000000000000n,
     admin: "0x33D33E756cB06b81fF0E861C0f071D3ae7E75021",
-    governor: "0x1c14246cf9b2FFfD4A6396493F085BF73C85218E",
-    token: "0x058b1c749226B562Fa2Af4ddDec882b9F151946A"
+    governor: "0xEc1c43eEC594f98946FdcE679c249605cb845838",
+    token: "0x6f6E03DB649186CaBC02Ae13245d4BA892D64183"
   }
 }

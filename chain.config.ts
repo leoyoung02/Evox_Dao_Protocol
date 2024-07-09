@@ -16,6 +16,7 @@ const chainIds = {
     avalanche: 43114,
     "avalanche-fuji": 43113,
     bsc: 56,
+    bsc_test: 97,
     optimism: 10,
     gnosis: 100,
     kroma: 255,
@@ -24,7 +25,7 @@ const chainIds = {
     shimmerEVM: 148,
     "zkSync-era": 324,
     "polygon-zkEVM": 1101,
-    "polygon-zkEVM-testnet": 1442,
+    "polygon-zkEVM-testnet": 2442,
     scroll: 534352,
     "scroll-sepolia": 534351,
     linea: 59144,
@@ -71,6 +72,9 @@ export function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig 
             break;
         case "bsc":
             jsonRpcUrl = vars.get("BINANCE_URL", process.env.BINANCE_URL || "");
+            break;
+        case "bsc_test":
+            jsonRpcUrl = vars.get("BINANCE_TESTNET_URL", process.env.BINANCE_TESTNET_URL || "");
             break;
         case "optimism":
             jsonRpcUrl = vars.get("OPTIMISM_URL", process.env.OPTIMISM_URL || "");
@@ -129,6 +133,8 @@ export function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig 
         default:
             throw new Error(`Unsupported chain: ${chain}`);
     }
+
+    // console.log("chain info", chainIds[chain], jsonRpcUrl);
 
     return {
         // at least
