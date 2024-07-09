@@ -21,8 +21,8 @@ contract EvoxSablier is AccessControl {
      * @dev Supported vote types. Matches Governor Bravo ordering.
      */
     enum VoteType {
-        For,
-        Against,                
+        Against,
+        For,             
         Abstain
     }
 
@@ -169,6 +169,8 @@ contract EvoxSablier is AccessControl {
 
     // Overflow vote handling
     function handleVotes(uint256 proposalId, address _user, uint8 _voteFlag) public onlyRoleOrOpenRole(GOVERNOR_ROLE) {
+
+        require(!hasVoted(proposalId, _user), "already voted");
         //calculating totalvoting power for user 
         uint256 totalVotingPower = calculateFinalvotingPower(_user);
 

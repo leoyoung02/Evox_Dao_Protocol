@@ -10,35 +10,36 @@ async function main() {
 	const [deployerSigner] = await ethers.getSigners();
 	const deployer = await deployerSigner.getAddress();
 
-  console.log("=================Deploying Sablier=====================");
+  console.log("=================Deploying OZ Governor=====================");
   console.log("deployer", deployer);
 
-  const sablier = await ethers.getContractFactory("EvoxSablier");
-  const contract = await sablier.connect(deployerSigner).deploy(
-    config.Sablier.admin,
-    config.Sablier.governor,
-    config.Sablier.sablier_contract_sepolia,
-    config.Sablier.token,
-    config.Sablier.quorum
+  const governor = await ethers.getContractFactory("OZGovernor");
+  const contract = await governor.connect(deployerSigner).deploy(
+    config.governor.name,
+    config.governor.token,
+    config.governor.timelock,   
+    config.governor.votingDelay,
+    config.governor.votingPeriod,
+    config.governor.proposalThreshold
   );
   const contractAddress = await contract.getAddress();
 
   // const tdBlock = token.
   const tdBlock = await hre.ethers.provider.getBlock("latest");
 
-  console.log(`\nSablier contract: `, contractAddress);
-		// verify cli
-	let verify_str =
+  console.log(`\nVETOER Governor contract: `, contractAddress);
+  // verify cli
+  let verify_str =
     `npx hardhat verify ` +
     `--network ${hre.network.name} ` +
-    `${contractAddress} "${config.Sablier.admin}" "${config.Sablier.governor}" "${config.Sablier.sablier_contract_sepolia}" "${config.Sablier.token}" "${config.Sablier.quorum}"`
+    `${contractAddress} "${config.governor.name}" ${config.governor.token} ${config.governor.timelock} ${config.governor.votingDelay} ${config.governor.votingPeriod} ${config.governor.proposalThreshold}`
   console.log("\n" + verify_str + "\n");
 
 
   // save it to a file to make sure the user doesn't lose it.
   fs.appendFileSync(
     "contracts.out",
-    `${new Date()}\nSablier contract deployed at: ${contractAddress}` +
+    `${new Date()}\nGovernor contract deployed at: ${contractAddress}` +
     ` - ${hre.network.name} - block number: ${tdBlock?.number}\n${verify_str}\n\n`
   );
 };

@@ -7,15 +7,21 @@
     "token_deploy": "npx hardhat run ./deploy/evoxtoken.ts --network sepolia",
     "timelock_deploy": "npx hardhat run ./deploy/timelock.ts --network sepolia",
     "sablier_deploy": "npx hardhat run ./deploy/evoxsablier.ts --network sepolia",
-    "governor_deploy": "npx hardhat run ./deploy/evoxgovernor.ts --network sepolia"
+    "governor_deploy": "npx hardhat run ./deploy/evoxgovernor.ts --network sepolia",
+    "oz_governor_deploy": "npx hardhat run ./deploy/ozgovernor.ts --network sepolia",
+    "publish": "npx hardhat run ./deploy/publish.ts --network sepolia"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.5"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
     "@openzeppelin/contracts": "^5.0.2",
     "@sablier/v2-core": "^1.1.2",
+    "@withtally/tally-publish-dao": "^0.0.5",
+    "caip": "^1.1.1",
     "dotenv": "^16.4.5",
     "hardhat-deploy": "^0.12.4"
   }

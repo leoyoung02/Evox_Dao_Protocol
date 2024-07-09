@@ -5,6 +5,7 @@ import "hardhat-gas-reporter";
 import type { HardhatUserConfig } from "hardhat/config";
 import { vars } from "hardhat/config";
 import { getChainConfig } from "./chain.config";
+import '@withtally/tally-publish-dao';
 
 /* ========== TASKS ===========*/
 import "./tasks/expect_contract";
@@ -55,9 +56,11 @@ const config: HardhatUserConfig = {
       optimisticEthereum: vars.get("OPT_ETHERSCAN_KEY", process.env.OPT_ETHERSCAN_KEY || ""),
       arbitrumOne: vars.get("ARBISCAN_API_KEY", process.env.ARBISCAN_API_KEY || ""),
       bsc: vars.get("BSCSCAN_KEY", process.env.BSCSCAN_KEY || ""),
+      bscTestnet: vars.get("BSCSCAN_KEY", process.env.BSCSCAN_KEY || ""),
       xdai: vars.get("GNOSISSCAN_KEY", process.env.GNOSISSCAN_KEY || ""),
       base: vars.get("BASESCAN_KEY", process.env.BASESCAN_KEY || ""),
       zkevm: vars.get("POLYGONSCAN_ZKEVM_KEY", process.env.POLYGONSCAN_ZKEVM_KEY || ""),
+      cardona: vars.get("POLYGONSCAN_KEY", process.env.POLYGONSCAN_KEY || ""),
     },
     // the name you setup in customchains must be also added above.
     customChains: [
@@ -87,6 +90,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: 'https://eth-sepolia.g.alchemy.com/v2/PmTh8MEvJXyQAkSIQ1a9JfhrMJEk9sC_', //"https://polygon-mumbai.g.alchemy.com/v2/O1KOV2z4K0eLZzDILA7Yhu4QVlw64YyY",
+        // url: "https://rpc.ankr.com/polygon_zkevm_cardona",
         // url: process.env.sepolia_url
       },
       
@@ -122,6 +126,7 @@ const config: HardhatUserConfig = {
     arbitrumNova: getChainConfig("arbitrum-nova"),
     // Binance mainnet config
     binance: getChainConfig("bsc"),
+    bsc_test: getChainConfig("bsc_test"),
     // Gnosis
     gnosis: getChainConfig("gnosis"),
     // ZKSYNC
@@ -129,6 +134,8 @@ const config: HardhatUserConfig = {
     amoy: getChainConfig("polygon-amoy"),
     // Polygon ZkEVM
     zkevm: getChainConfig("polygon-zkEVM"),
+    // Polygon ZkEVM Testnet
+    cardona: getChainConfig("polygon-zkEVM-testnet"),
     // Linea
     linea: getChainConfig("linea"),
     // Linea testnet
