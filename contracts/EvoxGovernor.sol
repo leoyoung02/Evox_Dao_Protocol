@@ -23,14 +23,14 @@ contract EvoxGovernor is Governor, GovernorSettings, GovernorStorage, GovernorVo
     IEvoxSablier public sablier;
     /**
      * @dev Initializes the OZGovernor contract.
-     * @param _name2 The name of the governor.
+     * @param _name4 The name of the governor.
      * @param _timelock The timelock controller.
      * @param _initialVotingDelay, 7200, 1 day
      * @param _initialVotingPeriod, 50400, 1 week 
      * @param _initialProposalThreshold, 0, proposal threshold
      */
     constructor(
-        string memory _name2, 
+        string memory _name4, 
         TimelockController _timelock,
         IEvoxSablier _sablier,
         IVotes _token,
@@ -38,7 +38,7 @@ contract EvoxGovernor is Governor, GovernorSettings, GovernorStorage, GovernorVo
         uint32 _initialVotingPeriod, 
         uint256 _initialProposalThreshold
     )
-        Governor(_name2)
+        Governor(_name4)
         GovernorSettings(_initialVotingDelay, _initialVotingPeriod, _initialProposalThreshold)
         GovernorVotes(_token)
         GovernorTimelockControl(_timelock)
@@ -286,7 +286,18 @@ contract EvoxGovernor is Governor, GovernorSettings, GovernorStorage, GovernorVo
      * @dev Is the proposal successful or not.
      */
     function _voteSucceeded(uint256 proposalId) internal view override(Governor) returns (bool) {
-        (uint256 forVotes, uint256 AgainstVotes, uint256 abstainVotes) = sablier.proposalVotes(proposalId);
+        uint256 proposal_start = proposalSnapshot(proposalId);
+        uint256 current_time = clock();
+        uint256 voting_duration = votingPeriod();
+        uint256 forVotes;
+        uint256 AgainstVotes;
+        uint256 abstainVotes;
+        if(proposal_start + voting_duration <= current_time) {
+            (forVotes, AgainstVotes, abstainVotes) = sablier.calculateFinalVotes(proposalId);
+        } else {
+            (forVotes, AgainstVotes, abstainVotes) = sablier.proposalVotes(proposalId);
+        }
+        // (uint256 forVotes, uint256 AgainstVotes, uint256 abstainVotes) = sablier.proposalVotes(proposalId);
         return forVotes > AgainstVotes;
     }
 
