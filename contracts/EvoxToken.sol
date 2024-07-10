@@ -19,21 +19,21 @@ contract EvoxToken is ERC20, ERC20Burnable, ERC20Pausable, AccessControl, ERC20P
 
     /**
      * @dev Initializes the ERC20Token contract.
-     * @param _name2 The name of the token.
+     * @param _name4 The name of the token.
      * @param _symbol The symbol of the token.
      * @param defaultAdmin The default admin role holder.
      * @param pauser The address with the pauser role.
      * @param minter The address with the minter role.
      */
     constructor(
-        string memory _name2,
+        string memory _name4,
         string memory _symbol,
         address defaultAdmin,
         address pauser,
         address minter
     )
-        ERC20(_name2, _symbol)
-        ERC20Permit(_name2)
+        ERC20(_name4, _symbol)
+        ERC20Permit(_name4)
     {
         _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
         _grantRole(PAUSER_ROLE, pauser);

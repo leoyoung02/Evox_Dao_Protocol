@@ -137,8 +137,8 @@ describe("EvoxDao Test", function () {
 
     await mineBlocks(10);
 
-    await expect(governor.connect(user1).castVote(proposalId, 0)).to.emit(governor, "VoteCast");
-    await expect(governor.connect(user2).castVote(proposalId, 0)).to.emit(governor, "VoteCast");
+    await expect(governor.connect(user1).castVote(proposalId, 1)).to.emit(governor, "VoteCast");
+    await expect(governor.connect(user2).castVote(proposalId, 1)).to.emit(governor, "VoteCast");
 
     await expect(governor.queue(proposalId)).to.be.reverted;
     await mineBlocks(18);
